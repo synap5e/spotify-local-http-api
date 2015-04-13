@@ -79,7 +79,7 @@ def play(oauth_token, csrf_token, spotify_uri):
         'uri': spotify_uri,
         'context': spotify_uri,
     }
-    get_json(get_url('/remote/play.json'), params=params, headers=ORIGIN_HEADER)
+    return get_json(get_url('/remote/play.json'), params=params, headers=ORIGIN_HEADER)
 
 
 def open_spotify_client():
