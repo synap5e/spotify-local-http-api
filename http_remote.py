@@ -14,7 +14,7 @@ ORIGIN_HEADER = {'Origin': 'https://open.spotify.com'}
 # I had some troubles with the version of Spotify's SSL cert and Python 2.7 on Mac.
 # Did this monkey dirty patch to fix it. Your milage may vary.
 def new_wrap_socket(*args, **kwargs):
-    kwargs['ssl_version'] = ssl.PROTOCOL_SSLv3
+    kwargs['ssl_version'] = ssl.PROTOCOL_TLSv1
     return orig_wrap_socket(*args, **kwargs)
 
 orig_wrap_socket, ssl.wrap_socket = ssl.wrap_socket, new_wrap_socket
