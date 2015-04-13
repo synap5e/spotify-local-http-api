@@ -1,8 +1,8 @@
 import ssl
 from string import ascii_lowercase
 from random import choice
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 import json
 import time
 
@@ -21,9 +21,9 @@ orig_wrap_socket, ssl.wrap_socket = ssl.wrap_socket, new_wrap_socket
 
 def get_json(url, params={}, headers={}):
     if params:
-        url += "?" + urllib.urlencode(params)
-    request = urllib2.Request(url, headers=headers)
-    return json.loads(urllib2.urlopen(request).read())
+        url += "?" + urllib.parse.urlencode(params)
+    request = urllib.request.Request(url, headers=headers)
+    return json.loads(urllib.request.urlopen(request).read().decode('utf-8'))
 
 
 def generate_local_hostname():
@@ -90,11 +90,11 @@ if __name__ == '__main__':
     oauth_token = get_oauth_token()
     csrf_token = get_csrf_token()
 
-    print "Playing album.."
+    print("Playing album..")
     play(oauth_token, csrf_token, 'spotify:album:6eWtdQm0hSlTgpkbw4LaBG')
     time.sleep(5)
-    print "Pausing song.."
+    print("Pausing song..")
     pause(oauth_token, csrf_token)
     time.sleep(2)
-    print "Unpausing song.."
+    print("Unpausing song..")
     unpause(oauth_token, csrf_token)
